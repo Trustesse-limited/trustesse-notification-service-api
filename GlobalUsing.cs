@@ -1,0 +1,14 @@
+﻿global using Hangfire;
+global using Ivoluntia.BackgroudServices.Common;
+global using Ivoluntia.BackgroudServices.Common.Entities;
+global using Ivoluntia.BackgroudServices.Extensions;
+global using Ivoluntia.BackgroudServices.Services.Background;
+global using Ivoluntia.BackgroudServices.Services.Implementations;
+global using Ivoluntia.BackgroudServices.Services.Interfaces;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.OpenApi.Models;
+global using Newtonsoft.Json;
+global using System.Net;
+global using Trustesse.Ivoluntia.Data.DataContext;
