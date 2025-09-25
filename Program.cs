@@ -24,12 +24,8 @@ RecurringJob.AddOrUpdate<IEmailJobService>(
     "*/10 * * * *"
 );
 
-
-if (app.Environment.IsDevelopment())
-{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
 
 app.MapGet("/", context =>
 {
