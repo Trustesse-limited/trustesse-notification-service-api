@@ -1,16 +1,39 @@
-﻿using Ivoluntia.BackgroudServices.Data.Repository.Interface;
+﻿using Ivoluntia.BackgroudServices.Data.Repository.Implementation;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Collections;
 
-namespace Ivoluntia.BackgroudServices.Data.Repository.Implementation
+namespace Ivoluntia.BackgroudServices.Data.Repository.Interface
 {
-    public class UnitofWork : IUnitofWork
+    public class UnitOfWork : IUnitOfWork
     {
-        private readonly iVoluntiaDataContext _context;
+        public readonly iVoluntiaDataContext _dbContext;
+        private Hashtable _repositories;
+        public DatabaseFacade Database => _dbContext.Database;
 
-        public UnitofWork(iVoluntiaDataContext context)
+        public INotificationRepository notificationRepo { get; set; }
+
+        public UnitOfWork(iVoluntiaDataContext dbContext)
         {
-            _context = context;
+            _dbContext = dbContext;
+            notificationRepo = new NotificationRepository(dbContext);
+        }
+        public IGenericRepository<TEntity> repository<TEntity>() where TEntity : class
+        {
+            if (_repositories == null) _repositories = new Hashtable();
+            var Type = typeof(TEntity).Name;
+            if (!_repositories.ContainsKey(Type))
+            {
+                var repositoryType = typeof(GenericRepository<TEntity>);
+                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _dbContext);
+                _repositories.Add(Type, repositoryInstance);
+            }
+            return (IGenericRepository<TEntity>)_repositories[Type];
         }
 
-        public Task<int> SaveChangesAsync() => _context.SaveChangesAsync();
+        public async Task<int> CompleteAsync()
+        {
+            return await _dbContext.SaveChangesAsync();
+        }
+
     }
 }

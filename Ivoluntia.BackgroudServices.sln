@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36301.6 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.7.11911.148 stable
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ivoluntia.BackgroudServices", "Ivoluntia.BackgroudServices.csproj", "{F137E005-3D62-49C0-9CED-AF21BBB9ABD1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trustesse.BackgroudServices", "Trustesse.BackgroudServices.csproj", "{F137E005-3D62-49C0-9CED-AF21BBB9ABD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

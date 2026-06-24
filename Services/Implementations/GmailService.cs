@@ -44,7 +44,8 @@ namespace Ivoluntia.BackgroudServices.Services.Implementations
                 using var client = new SmtpClient(config.SmtpServer, config.PortNumber)
                 {
                     Credentials = new NetworkCredential(config.FromEmail, config.Password),
-                    EnableSsl = config.EnableSSL
+                    EnableSsl = config.EnableSSL,
+                    UseDefaultCredentials = false
                 };
 
                 await client.SendMailAsync(mail);

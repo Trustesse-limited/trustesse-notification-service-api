@@ -2,11 +2,11 @@
 
 namespace Ivoluntia.BackgroudServices.Data.Repository.Implementation
 {
-    public class NotificationRepository : INotificationRepository
+    public class NotificationRepository : GenericRepository<Notification>, INotificationRepository
     {
         private readonly iVoluntiaDataContext _context;
 
-        public NotificationRepository(iVoluntiaDataContext context)
+        public NotificationRepository(iVoluntiaDataContext context) : base(context)
         {
             _context = context;
         }

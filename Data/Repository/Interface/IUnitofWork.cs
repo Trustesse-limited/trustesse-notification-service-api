@@ -1,8 +1,9 @@
 ﻿
 namespace Ivoluntia.BackgroudServices.Data.Repository.Interface
 {
-    public interface IUnitofWork
+    public interface IUnitOfWork
     {
-        Task<int> SaveChangesAsync();
+        IGenericRepository<TEntity> repository<TEntity>() where TEntity : class;
+        Task<int> CompleteAsync();
     }
 }

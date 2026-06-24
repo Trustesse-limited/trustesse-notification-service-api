@@ -11,12 +11,6 @@ namespace Trustesse.Ivoluntia.Data.DataContext
         {
         }
 
-        public DbSet<Foundation> Foundations { get; set; }
-        public DbSet<Interest> Interests { get; set; }
-        public DbSet<Skill> Skills { get; set; }
-        public DbSet<Location> Locations { get; set; }
-        public DbSet<FoundationCategory> FoundationCategories { get; set; }
-        public DbSet<Cause> Causes { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<NotificationChannel> NotificationChannels { get; set; }
         public DbSet<NotificationChannelSettings> NotificationChannelSettings { get; set; }

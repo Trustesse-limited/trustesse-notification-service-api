@@ -1,4 +1,4 @@
-﻿using Hangfire.MySql;
+﻿using Hangfire.SqlServer;
 
 namespace Ivoluntia.BackgroudServices.Extensions
 {
@@ -14,13 +14,17 @@ namespace Ivoluntia.BackgroudServices.Extensions
             });
 
             builder.Services.AddHangfire(config =>
-            config.UseStorage(new MySqlStorage(
-            builder.Configuration.GetConnectionString("DefaultConnection"),
-            new MySqlStorageOptions
-            {
-                TablesPrefix = "Hangfire"
-
-            })));
+            config.UseSqlServerStorage(
+                builder.Configuration.GetConnectionString("DefaultConnection"),
+                new SqlServerStorageOptions
+                {
+                    CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                    QueuePollInterval = TimeSpan.Zero,
+                    UseRecommendedIsolationLevel = true,
+                    DisableGlobalLocks = true,
+                    SchemaName = "Hangfire"
+                }));
         }
     }
 }
