@@ -1,3 +1,4 @@
+using HangfireBasicAuthenticationFilter;
 using Ivoluntia.BackgroudServices.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +16,16 @@ builder.ConfigureHsts();
 
 var app = builder.Build();
 
-app.UseHangfireDashboard("/hangfire");
-
+app.UseHangfireDashboard("/seejobs",
+    new DashboardOptions
+    {
+        Authorization = new[]{
+        new HangfireCustomBasicAuthenticationFilter{
+            User = "trustesse-admin", Pass = "Password123#"
+            }
+        }
+    }
+);
 
 RecurringJob.AddOrUpdate<IEmailJobService>(
     "send-unsent-emails",

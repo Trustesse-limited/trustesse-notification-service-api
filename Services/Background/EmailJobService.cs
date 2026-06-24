@@ -5,11 +5,11 @@ namespace Ivoluntia.BackgroudServices.Services.Background
 {
     public class EmailJobService : IEmailJobService
     {
-        private readonly IUnitofWork _uow;
+        private readonly IUnitOfWork _uow;
         private readonly INotificationService _notificationService;
         private readonly IEmailServiceFactory _emailServiceFactory;
 
-        public EmailJobService(INotificationService notificationService, IEmailServiceFactory emailServiceFactory, IUnitofWork uow)
+        public EmailJobService(INotificationService notificationService, IEmailServiceFactory emailServiceFactory, IUnitOfWork uow)
         {
             _notificationService = notificationService;
             _emailServiceFactory = emailServiceFactory;
@@ -42,7 +42,7 @@ namespace Ivoluntia.BackgroudServices.Services.Background
 
             _notificationService.UpdateNotificationStatuses(unsentEmails);
 
-            await _uow.SaveChangesAsync();
+            await _uow.CompleteAsync();
 
             return unsentEmails.Count;
         }

@@ -8,11 +8,11 @@ namespace Ivoluntia.BackgroudServices.Extensions
         public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
         {
             services.AddScoped<INotificationService, NotificationService>();
-            services.AddScoped<IEmailJobService, EmailJobService>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<IEmailJobService, EmailJobService>();
             services.AddScoped<GmailService>();
             services.AddScoped<IEmailServiceFactory, EmailServiceFactory>();
-            services.AddScoped<IUnitofWork, UnitofWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddSwaggerGen(options =>
             {
@@ -76,9 +76,8 @@ namespace Ivoluntia.BackgroudServices.Extensions
         public static IServiceCollection AddCustomDatabase(this IServiceCollection services, IConfiguration config)
         {
             services.AddDbContext<iVoluntiaDataContext>(options =>
-                options.UseMySql(
-                    config.GetConnectionString("DefaultConnection")!,
-                    ServerVersion.AutoDetect(config.GetConnectionString("DefaultConnection")!)
+                options.UseSqlServer(
+                    config.GetConnectionString("DefaultConnection")
                 )
             );
 
