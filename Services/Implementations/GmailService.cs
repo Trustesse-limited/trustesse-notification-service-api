@@ -20,12 +20,12 @@ namespace Ivoluntia.BackgroudServices.Services.Implementations
         {
             try
             {
-                var channelSettings = await _notificationRepository.GetChannelSettings(EmailServiceProvider.Gmail.ToString(), NotificationChannels.Email.ToString());
-                GmailClientConfig config = (GmailClientConfig)NotificationSettingsFactory.DeserializeProviderSettings(channelSettings.Settings, channelSettings.Provider);
-
+                var channelSettings = await _notificationRepository.GetChannelSettings(EmailServiceProvider.Brevo.ToString(), NotificationChannels.Email.ToString());
+                //GmailClientConfig config = (GmailClientConfig)NotificationSettingsFactory.DeserializeProviderSettings(channelSettings.Settings, channelSettings.Provider);
+                BrevoClientConfig brevoConfig = (BrevoClientConfig)NotificationSettingsFactory.DeserializeProviderSettings(channelSettings.Settings, channelSettings.Provider);
                 using var mail = new MailMessage
                 {
-                    From = new MailAddress(config.FromEmail, config.DisplayName),
+                    From = new MailAddress(brevoConfig.FromEmail, brevoConfig.DisplayName),
                     Subject = model.Subject,
                     Body = model.Message,
                     IsBodyHtml = true
@@ -41,10 +41,10 @@ namespace Ivoluntia.BackgroudServices.Services.Implementations
                     mail.Attachments.Add(new Attachment(model.Attachments));
                 }
 
-                using var client = new SmtpClient(config.SmtpServer, config.PortNumber)
+                using var client = new SmtpClient(brevoConfig.SmtpServer, brevoConfig.PortNumber)
                 {
-                    Credentials = new NetworkCredential(config.FromEmail, config.Password),
-                    EnableSsl = config.EnableSSL
+                    Credentials = new NetworkCredential(brevoConfig.Username, brevoConfig.Password),
+                    EnableSsl = brevoConfig.EnableSSL
                 };
 
                 await client.SendMailAsync(mail);

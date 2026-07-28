@@ -9,6 +9,7 @@ namespace Ivoluntia.BackgroudServices.Common.Helpers
             return provider switch
             {
                 "Gmail" => JsonConvert.DeserializeObject<GmailClientConfig>(settings),
+                "Brevo" => JsonConvert.DeserializeObject<BrevoClientConfig>(settings),
                 _ => throw new NotSupportedException($"Provider '{provider}' is not available.")
             };
         }

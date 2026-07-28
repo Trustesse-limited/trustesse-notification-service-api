@@ -3,6 +3,7 @@
     public enum EmailServiceProvider
     {
         Gmail,
-        Sendgrid
+        Sendgrid,
+        Brevo
     }
 }

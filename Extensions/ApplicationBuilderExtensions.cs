@@ -21,6 +21,14 @@ namespace Ivoluntia.BackgroudServices.Extensions
                 TablesPrefix = "Hangfire"
 
             })));
+
+            builder.Services.AddHangfire(config =>
+           config.UseSqlServerStorage(
+             builder.Configuration.GetConnectionString("DefaultConnection"),
+           new Hangfire.SqlServer.SqlServerStorageOptions
+           {
+            SchemaName = "Hangfire"
+           }));
         }
     }
 }
