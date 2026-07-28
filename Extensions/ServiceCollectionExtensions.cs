@@ -1,5 +1,6 @@
 ﻿using Ivoluntia.BackgroudServices.Data.Repository.Implementation;
 using Ivoluntia.BackgroudServices.Data.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ivoluntia.BackgroudServices.Extensions
 {
@@ -76,9 +77,9 @@ namespace Ivoluntia.BackgroudServices.Extensions
         public static IServiceCollection AddCustomDatabase(this IServiceCollection services, IConfiguration config)
         {
             services.AddDbContext<iVoluntiaDataContext>(options =>
-                options.UseMySql(
-                    config.GetConnectionString("DefaultConnection")!,
-                    ServerVersion.AutoDetect(config.GetConnectionString("DefaultConnection")!)
+                options.UseSqlServer(
+                    config.GetConnectionString("DefaultConnection")
+                //ServerVersion.AutoDetect(config.GetConnectionString("DefaultConnection")!)
                 )
             );
 

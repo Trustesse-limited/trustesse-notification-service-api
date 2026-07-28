@@ -1,4 +1,5 @@
-﻿using Ivoluntia.BackgroudServices.Common.Dtos;
+﻿using Hangfire;
+using Ivoluntia.BackgroudServices.Common.Dtos;
 using Ivoluntia.BackgroudServices.Data.Repository.Interface;
 
 namespace Ivoluntia.BackgroudServices.Services.Background

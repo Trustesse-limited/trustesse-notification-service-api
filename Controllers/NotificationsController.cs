@@ -5,7 +5,7 @@ namespace Ivoluntia.BackgroudServices.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class NotificationsController : ControllerBase
-    {
+    {  
         private readonly IEmailJobService _emailJobService;
         private readonly IBackgroundJobClient _backgroundJobClient;
 
